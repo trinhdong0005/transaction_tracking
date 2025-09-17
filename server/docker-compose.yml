@@ -1,0 +1,17 @@
+services:
+  transaction_tracking:
+    image: ghcr.io/dongcodebmt/transaction_tracking:latest
+    container_name: transaction_tracking
+    user: 1000:1000
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./data.txt:/app/data.txt
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    environment:
+      TZ: Asia/Ho_Chi_Minh
+      API_KEY: ${API_KEY}
+    restart: on-failure
