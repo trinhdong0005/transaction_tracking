@@ -13,11 +13,11 @@ function errorHandler(err, req, res, next) {
 }
 
 
-function apiKeyAuthMiddleware(err, req, res, next) {
-  const API_KEY = process.env.YOUR_API_KEY
+function apiKeyAuthMiddleware(req, res, next) {
+  const apiKey = process.env.API_KEY
   const incomingApiKey = req.headers['x-api-key']
 
-  if (!incomingApiKey || incomingApiKey !== API_KEY) {
+  if (!incomingApiKey || incomingApiKey !== apiKey) {
     return res.status(401).json({ message: 'Unauthorized: Invalid or missing API key.' })
   }
   next()
